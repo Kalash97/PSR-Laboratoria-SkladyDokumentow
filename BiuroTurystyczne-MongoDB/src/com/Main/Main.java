@@ -9,11 +9,17 @@ import com.Actions.Action;
 import com.Actions.DropDBAction;
 import com.Actions.ExitAction;
 import com.Actions.ClientActions.CreateClientAction;
+import com.Actions.ClientActions.DeleteClientByIdAction;
 import com.Actions.ClientActions.ReadClientByIdAction;
+import com.Actions.ClientActions.UpdateClientAction;
 import com.Actions.GuideActions.CreateGuideAction;
+import com.Actions.GuideActions.DeleteGuideByIdAction;
 import com.Actions.GuideActions.ReadGuideByIdAction;
+import com.Actions.GuideActions.UpdateGuideAction;
 import com.Actions.TourActions.CreateTourAction;
+import com.Actions.TourActions.DeleteTourByIdAction;
 import com.Actions.TourActions.ReadTourByIdAction;
+import com.Actions.TourActions.UpdateTourAction;
 import com.View.ConsoleView;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
@@ -61,12 +67,18 @@ public class Main {
 		
 		actions.add(new CreateTourAction(tours, cv));
 		actions.add(new ReadTourByIdAction(tours, cv));
+		actions.add(new UpdateTourAction(tours, cv));
+		actions.add(new DeleteTourByIdAction(tours, cv));
 		
 		actions.add(new CreateClientAction(clients, cv));
 		actions.add(new ReadClientByIdAction(clients, cv));
+		actions.add(new UpdateClientAction(clients, cv));
+		actions.add(new DeleteClientByIdAction(clients, cv));
 		
 		actions.add(new CreateGuideAction(guides, cv));
 		actions.add(new ReadGuideByIdAction(guides, cv));
+		actions.add(new UpdateGuideAction(guides, cv));
+		actions.add(new DeleteGuideByIdAction(guides, cv));
 		
 		actions.add(new DropDBAction(db, cv, mongoClient));
 		actions.add(new ExitAction(mongoClient));

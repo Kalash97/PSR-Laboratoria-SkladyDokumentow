@@ -1,11 +1,13 @@
 package com.Actions.GuideActions;
 
+import static com.mongodb.client.model.Filters.eq;
+
 import org.bson.Document;
 
 import com.Actions.Action;
 import com.Utils.ValidUtil;
 import com.View.ConsoleView;
-import com.mongodb.BasicDBObject;
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 
 import lombok.AllArgsConstructor;
@@ -21,13 +23,9 @@ public class ReadGuideByIdAction implements Action{
 		String idString = getValidInt("Podaj ID");
 		int id = Integer.parseInt(idString);
 		
-		Document doc = guides.find(new BasicDBObject("_id", id)).first();
-		if(doc == null) {
-			cv.print("Nie ma takiego przewodnika");
-			return;
-		}
+		FindIterable<Document> docs = guides.find(eq("_id", id));
 		
-		cv.print(doc.toJson());
+		cv.print(docs);
 	}
 
 	private String getValidInt(String msg) {

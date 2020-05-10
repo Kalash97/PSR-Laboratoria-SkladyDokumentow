@@ -1,11 +1,13 @@
 package com.Actions.TourActions;
 
+import static com.mongodb.client.model.Filters.eq;
+
 import org.bson.Document;
 
 import com.Actions.Action;
 import com.Utils.ValidUtil;
 import com.View.ConsoleView;
-import com.mongodb.BasicDBObject;
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 
 import lombok.AllArgsConstructor;
@@ -22,13 +24,9 @@ public class ReadTourByIdAction implements Action{
 		String idString = getValidInt("Podaj ID");
 		int id = Integer.parseInt(idString);
 		
-		Document doc = tours.find(new BasicDBObject("_id", id)).first();
-		if(doc == null) {
-			cv.print("Nie ma takiej wycieczki");
-			return;
-		}
+		FindIterable<Document> docs = tours.find(eq("_id", id));
 		
-		cv.print(doc.toJson());
+		cv.print(docs);
 	}
 
 	private String getValidInt(String msg) {

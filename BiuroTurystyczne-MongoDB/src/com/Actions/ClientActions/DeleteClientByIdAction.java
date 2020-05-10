@@ -7,13 +7,12 @@ import org.bson.Document;
 import com.Actions.Action;
 import com.Utils.ValidUtil;
 import com.View.ConsoleView;
-import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class ReadClientByIdAction implements Action{
+public class DeleteClientByIdAction implements Action{
 
 	private MongoCollection<Document> clients;
 	private ConsoleView cv;
@@ -23,10 +22,8 @@ public class ReadClientByIdAction implements Action{
 		String idString = getValidInt("Podaj ID");
 		int id = Integer.parseInt(idString);
 		
-		FindIterable<Document> docs = clients.find(eq("_id", id));
-		
-		cv.print(docs);
-		
+		cv.print("Deleting client where id = "+id);
+		clients.deleteOne(eq("_id", id));
 	}
 
 	private String getValidInt(String msg) {
@@ -40,7 +37,7 @@ public class ReadClientByIdAction implements Action{
 	
 	@Override
 	public String getName() {
-		return "ReadClientById";
+		return "DeleteClientByIdAction";
 	}
 
 }
