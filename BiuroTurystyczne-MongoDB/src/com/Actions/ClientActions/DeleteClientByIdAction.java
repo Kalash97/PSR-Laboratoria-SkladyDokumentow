@@ -37,7 +37,7 @@ public class DeleteClientByIdAction implements Action{
 	
 	@Override
 	public String getName() {
-		return "DeleteClientByIdAction";
+		return "DeleteClientById";
 	}
 
 }
