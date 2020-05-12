@@ -34,7 +34,8 @@ public class CreateTourAction implements Action{
 		Document doc = new Document("_id", id)
 				.append("city", city)
 				.append("daysOfTour", daysOfTour)
-				.append("price", price);
+				.append("price", price)
+				.append("finished", false);
 		try {
 			tours.insertOne(doc);
 		} catch (MongoWriteException e) {

@@ -1,10 +1,10 @@
-package com.Actions.ClientActions;
+package com.Actions.TourActions;
 
-import static com.mongodb.client.model.Filters.and;
+import static com.mongodb.client.model.Updates.*;
 import static com.mongodb.client.model.Filters.eq;
-import static com.mongodb.client.model.Updates.pull;
 
 import org.bson.Document;
+import org.bson.conversions.Bson;
 
 import com.Actions.Action;
 import com.Utils.ValidUtil;
@@ -14,9 +14,8 @@ import com.mongodb.client.MongoCollection;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class DeleteClientByIdAction implements Action{
+public class FinishTourAction implements Action{
 
-	private MongoCollection<Document> clients;
 	private MongoCollection<Document> tours;
 	private ConsoleView cv;
 	
@@ -24,13 +23,10 @@ public class DeleteClientByIdAction implements Action{
 	public void launch() {
 		String idString = getValidInt("Podaj ID");
 		int id = Integer.parseInt(idString);
+		Bson filter = eq("_id", id);
+		Bson updateStatus = set("finished", true);
 		
-		Document client = clients.find(eq("_id", id)).first();
-		
-		tours.updateMany(and(eq("finished", false), eq("clients", client)), pull("clients", client));
-		
-		cv.print("Deleting client where id = "+id);
-		clients.deleteOne(eq("_id", id));
+		tours.updateOne(filter, updateStatus);
 	}
 
 	private String getValidInt(String msg) {
@@ -44,7 +40,7 @@ public class DeleteClientByIdAction implements Action{
 	
 	@Override
 	public String getName() {
-		return "DeleteClientById";
+		return "FinishTour";
 	}
 
 }

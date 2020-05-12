@@ -1,7 +1,7 @@
 package com.Actions.TourActions;
 
 import static com.mongodb.client.model.Updates.*;
-import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Filters.*;
 
 import org.bson.Document;
 import org.bson.conversions.Bson;
@@ -53,7 +53,7 @@ public class UpdateTourAction implements Action {
 			updatePrice = set("price", price);
 		}
 
-		Bson filter = eq("_id", id);
+		Bson filter = and(eq("_id", id), eq("finished", false));
 		
 		if(updateCity!=null) {
 			tours.updateOne(filter, updateCity);

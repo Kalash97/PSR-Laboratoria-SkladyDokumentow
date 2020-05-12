@@ -1,5 +1,6 @@
 package com.Actions.ClientTourActions;
 
+import static com.mongodb.client.model.Filters.and;
 import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Updates.pull;
 
@@ -43,7 +44,7 @@ public class RemoveClientFromTourAction implements Action{
 			return;
 		}
 		
-		tours.updateOne(eq("_id", idTour), pull("clients", client));
+		tours.updateOne(and(eq("_id", idTour), eq("finished", false)), pull("clients", client));
 	}
 
 	private String getValidInt(String msg) {

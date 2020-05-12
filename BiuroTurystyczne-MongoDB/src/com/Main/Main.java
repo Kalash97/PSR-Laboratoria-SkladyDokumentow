@@ -20,6 +20,7 @@ import com.Actions.GuideActions.ReadGuideByIdAction;
 import com.Actions.GuideActions.UpdateGuideAction;
 import com.Actions.TourActions.CreateTourAction;
 import com.Actions.TourActions.DeleteTourByIdAction;
+import com.Actions.TourActions.FinishTourAction;
 import com.Actions.TourActions.ReadTourByIdAction;
 import com.Actions.TourActions.UpdateTourAction;
 import com.Actions.TourGuideActions.AddGuideToTourAction;
@@ -74,16 +75,17 @@ public class Main {
 		actions.add(new ReadTourByIdAction(tours, cv));
 		actions.add(new UpdateTourAction(tours, cv));
 		actions.add(new DeleteTourByIdAction(tours, cv));
+		actions.add(new FinishTourAction(tours, cv));
 		
 		actions.add(new CreateClientAction(clients, cv));
 		actions.add(new ReadClientByIdAction(clients, cv));
 		actions.add(new UpdateClientAction(clients, cv));
-		actions.add(new DeleteClientByIdAction(clients, cv));
+		actions.add(new DeleteClientByIdAction(clients, tours, cv));
 		
 		actions.add(new CreateGuideAction(guides, cv));
 		actions.add(new ReadGuideByIdAction(guides, cv));
 		actions.add(new UpdateGuideAction(guides, cv));
-		actions.add(new DeleteGuideByIdAction(guides, cv));
+		actions.add(new DeleteGuideByIdAction(guides, tours, cv));
 		
 		actions.add(new AddClientToTourAction(tours, clients, cv));
 		actions.add(new RemoveClientFromTourAction(tours, clients, cv));

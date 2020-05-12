@@ -1,5 +1,6 @@
 package com.Actions.TourGuideActions;
 
+import static com.mongodb.client.model.Filters.and;
 import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Updates.pull;
 
@@ -44,7 +45,7 @@ public class RemoveGuideFromTourAction implements Action{
 			return;
 		}
 		
-		tours.updateOne(eq("_id", idTour), pull("guides", guide));
+		tours.updateOne(and(eq("_id", idTour), eq("finished", false)), pull("guides", guide));
 	}
 
 	private String getValidInt(String msg) {

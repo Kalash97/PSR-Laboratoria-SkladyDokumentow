@@ -1,5 +1,6 @@
 package com.Actions.TourGuideActions;
 
+import static com.mongodb.client.model.Filters.and;
 import static com.mongodb.client.model.Filters.eq;
 
 import org.bson.Document;
@@ -43,7 +44,7 @@ public class AddGuideToTourAction implements Action{
 			return;
 		}
 		
-		tours.updateOne(eq("_id", idTour), Updates.addToSet("guides", guide));
+		tours.updateOne(and(eq("_id", idTour), eq("finished", false)), Updates.addToSet("guides", guide));
 	}
 
 	private String getValidInt(String msg) {

@@ -1,6 +1,6 @@
 package com.Actions.ClientTourActions;
 
-import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Filters.*;
 
 import org.bson.Document;
 
@@ -44,7 +44,7 @@ public class AddClientToTourAction implements Action{
 			return;
 		}
 		
-		tours.updateOne(eq("_id", idTour), Updates.addToSet("clients", client));
+		tours.updateOne(and(eq("_id", idTour), eq("finished", false)), Updates.addToSet("clients", client));
 	}
 
 	private String getValidInt(String msg) {
