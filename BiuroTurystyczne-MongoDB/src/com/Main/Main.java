@@ -23,6 +23,7 @@ import com.Actions.TourActions.DeleteTourByIdAction;
 import com.Actions.TourActions.ReadTourByIdAction;
 import com.Actions.TourActions.UpdateTourAction;
 import com.Actions.TourGuideActions.AddGuideToTourAction;
+import com.Actions.TourGuideActions.FindTourByGuideAction;
 import com.Actions.TourGuideActions.RemoveGuideFromTourAction;
 import com.View.ConsoleView;
 import com.mongodb.MongoClient;
@@ -89,6 +90,7 @@ public class Main {
 		
 		actions.add(new AddGuideToTourAction(guides, tours, cv));
 		actions.add(new RemoveGuideFromTourAction(guides, tours, cv));
+		actions.add(new FindTourByGuideAction(guides, tours, cv));
 		
 		actions.add(new DropDBAction(db, cv, mongoClient));
 		actions.add(new ExitAction(mongoClient));
