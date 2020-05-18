@@ -6,8 +6,22 @@ import java.util.List;
 import com.Actions.Action;
 import com.Actions.DropDBAction;
 import com.Actions.ExitAction;
+import com.Actions.ClientActions.CreateClientAction;
+import com.Actions.ClientActions.DeleteClientAction;
+import com.Actions.ClientActions.ShowAllClientsAction;
+import com.Actions.ClientActions.ShowClientByIdAction;
+import com.Actions.ClientActions.UpdateClientAction;
+import com.Actions.GuideActions.CreateGuideAction;
+import com.Actions.GuideActions.DeleteGuideAction;
+import com.Actions.GuideActions.ShowAllGuidesAction;
+import com.Actions.GuideActions.ShowGuideByIdAction;
+import com.Actions.GuideActions.UpdateGuideAction;
 import com.Actions.TourActions.CreateTourAction;
+import com.Actions.TourActions.DeleteTourByIdAction;
+import com.Actions.TourActions.FinishTourAction;
 import com.Actions.TourActions.ShowAllToursAction;
+import com.Actions.TourActions.ShowTourByIdAction;
+import com.Actions.TourActions.UpdateTourAction;
 import com.View.ConsoleView;
 import com.rethinkdb.RethinkDB;
 import com.rethinkdb.gen.exc.ReqlOpFailedError;
@@ -21,6 +35,8 @@ public class Main {
 
 	public static void main(String[] args) {
 
+		//Line to run rethink from cmd: rethinkdb.exe --bind all --http-port 8085
+		
 		init();
 		while(true) {
 			cv.print("Lista dostêpnych akcji:");
@@ -62,7 +78,23 @@ public class Main {
 		}
 		
 		actions.add(new CreateTourAction(cv, r, conn));
+		actions.add(new ShowTourByIdAction(cv, r, conn));
 		actions.add(new ShowAllToursAction(cv, r, conn));
+		actions.add(new DeleteTourByIdAction(cv, r, conn));
+		actions.add(new UpdateTourAction(cv, r, conn));
+		actions.add(new FinishTourAction(cv, r, conn));
+		
+		actions.add(new CreateClientAction(cv, r, conn));
+		actions.add(new ShowClientByIdAction(cv, r, conn));
+		actions.add(new ShowAllClientsAction(cv, r, conn));
+		actions.add(new DeleteClientAction(cv, r, conn));
+		actions.add(new UpdateClientAction(cv, r, conn));
+		
+		actions.add(new CreateGuideAction(cv, r, conn));
+		actions.add(new ShowGuideByIdAction(cv, r, conn));
+		actions.add(new ShowAllGuidesAction(cv, r, conn));
+		actions.add(new DeleteGuideAction(cv, r, conn));
+		actions.add(new UpdateGuideAction(cv, r, conn));
 		
 		actions.add(new ExitAction());
 		actions.add(new DropDBAction(cv, r, conn));

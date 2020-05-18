@@ -1,5 +1,8 @@
 package com.Actions.TourActions;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import com.Actions.Action;
 import com.View.ConsoleView;
 import com.Utils.ValidUtil;
@@ -18,8 +21,6 @@ public class CreateTourAction implements Action{
 	@Override
 	public void launch() {	
 		
-		//Line to run rethink from cmd: rethinkdb.exe --bind all --http-port 8085
-		
 		String idString = getValidInt("Podaj ID");
 		int id = Integer.parseInt(idString);
 		
@@ -32,10 +33,19 @@ public class CreateTourAction implements Action{
 		String priceString = getValidDouble("Podaj cenê na osobê");
 		double price = Double.parseDouble(priceString);
 		
+//		@SuppressWarnings("rawtypes")
+//		Set clients = new HashSet();
+//		
+//		@SuppressWarnings("rawtypes")
+//		Set guides = new HashSet();
+		
 		r.table("tours").insert(r.array(r.hashMap("id", id)
 				.with("city", city)
 				.with("daysOfTour", daysOfTour)
-				.with("price", price))).run(conn);
+				.with("price", price)
+				.with("finished", false)
+				/*.with("clients", clients)
+				.with("guides", guides)*/)).run(conn);
 	}
 
 	private String getValidInt(String msg) {
