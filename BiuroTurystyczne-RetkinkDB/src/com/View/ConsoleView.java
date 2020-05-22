@@ -1,5 +1,6 @@
 package com.View;
 
+import java.util.HashSet;
 import java.util.Scanner;
 
 import com.rethinkdb.net.Cursor;
@@ -22,4 +23,12 @@ public class ConsoleView {
 	public String read() {
 		return scanner.nextLine();
 	}
+
+	public void print(Object[] array) {
+		for(Object o : array) {
+			System.out.println(o);
+		}
+	}
+
+	
 }

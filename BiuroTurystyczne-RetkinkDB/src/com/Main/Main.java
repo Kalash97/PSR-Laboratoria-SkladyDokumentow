@@ -11,6 +11,7 @@ import com.Actions.ClientActions.DeleteClientAction;
 import com.Actions.ClientActions.ShowAllClientsAction;
 import com.Actions.ClientActions.ShowClientByIdAction;
 import com.Actions.ClientActions.UpdateClientAction;
+import com.Actions.ClientTourActions.AddClientToTourAction;
 import com.Actions.GuideActions.CreateGuideAction;
 import com.Actions.GuideActions.DeleteGuideAction;
 import com.Actions.GuideActions.ShowAllGuidesAction;
@@ -95,6 +96,8 @@ public class Main {
 		actions.add(new ShowAllGuidesAction(cv, r, conn));
 		actions.add(new DeleteGuideAction(cv, r, conn));
 		actions.add(new UpdateGuideAction(cv, r, conn));
+		
+		actions.add(new AddClientToTourAction(cv, r, conn));
 		
 		actions.add(new ExitAction());
 		actions.add(new DropDBAction(cv, r, conn));

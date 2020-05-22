@@ -33,19 +33,19 @@ public class CreateTourAction implements Action{
 		String priceString = getValidDouble("Podaj cenê na osobê");
 		double price = Double.parseDouble(priceString);
 		
-//		@SuppressWarnings("rawtypes")
-//		Set clients = new HashSet();
-//		
-//		@SuppressWarnings("rawtypes")
-//		Set guides = new HashSet();
+		@SuppressWarnings("rawtypes")
+		Set clients = new HashSet();
+		
+		@SuppressWarnings("rawtypes")
+		Set guides = new HashSet();
 		
 		r.table("tours").insert(r.array(r.hashMap("id", id)
 				.with("city", city)
 				.with("daysOfTour", daysOfTour)
 				.with("price", price)
 				.with("finished", false)
-				/*.with("clients", clients)
-				.with("guides", guides)*/)).run(conn);
+				.with("clients", clients)
+				.with("guides", guides))).run(conn);
 	}
 
 	private String getValidInt(String msg) {
